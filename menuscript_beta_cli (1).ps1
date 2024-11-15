@@ -1,7 +1,4 @@
-# Connect to Azure
 Connect-AzAccount
-
-# Function to display similar user names
 function Show-SimilarUsers {
     param (
         [string]$searchTerm
@@ -22,7 +19,6 @@ function Show-SimilarUsers {
     }
 }
 
-# Function to display similar group names
 function Show-SimilarGroups {
     param (
         [string]$searchTerm
@@ -43,7 +39,6 @@ function Show-SimilarGroups {
     }
 }
 
-# User Management Menu
 function Show-UserMenu {
     Clear-Host
     Write-Host "User Management Options:"
@@ -54,7 +49,6 @@ function Show-UserMenu {
     Write-Host "5. Return to Main Menu"
 }
 
-# Group Management Menu
 function Show-GroupMenu {
     Clear-Host
     Write-Host "Group Management Options:"
@@ -65,7 +59,6 @@ function Show-GroupMenu {
     Write-Host "5. Return to Main Menu"
 }
 
-# Function to show users
 function Show-Users {
     $users = Get-AzADUser | Select-Object DisplayName, UserPrincipalName
     if ($users) {
@@ -78,7 +71,6 @@ function Show-Users {
     }
 }
 
-# Function to show groups
 function Show-Groups {
     $groups = Get-AzADGroup | Select-Object DisplayName
     if ($groups) {
@@ -91,13 +83,12 @@ function Show-Groups {
     }
 }
 
-# Function to handle user creation
 function Create-User {
     $displayName = Read-Host "Enter the user's display name"
-    $upn = Read-Host "Enter the user's UPN (or press Enter to use default domain @gomikgnomik1433outlook.onmicrosoft.com)"
-    
+    $upn = Read-Host "Enter the user's UPN (or press Enter to use default domain @domain.com)"   # change the text to show your desired default domain aka the one you set
+
     if (-not $upn) {
-        $upn = "$($displayName.Replace(' ', '.'))@gomikgnomik1433outlook.onmicrosoft.com"
+        $upn = "$($displayName.Replace(' ', '.'))@domain.com" #set default domain here
     }
 
     $newUserParams = @{
@@ -119,7 +110,6 @@ function Create-User {
     }
 }
 
-# Function to handle user deletion
 function Delete-User {
     $userInput = Read-Host "Enter the user's display name or user principal name (UPN) to delete"
 
@@ -161,7 +151,6 @@ function Delete-User {
     }
 }
 
-# Function to handle user recovery
 function Recover-User {
     $searchTerm = Read-Host "Enter the display name or user principal name (UPN) to search for deleted users"
 
@@ -198,7 +187,6 @@ function Recover-User {
     }
 }
 
-# Function to show groups
 function Show-Groups {
     $groups = Get-AzADGroup | Select-Object DisplayName
     if ($groups) {
@@ -211,7 +199,6 @@ function Show-Groups {
     }
 }
 
-# Function to handle group creation
 function Create-Group {
     $groupName = Read-Host "Enter the group's display name"
     $description = Read-Host "Enter a description for the group (press Enter to leave blank)"
@@ -235,7 +222,6 @@ function Create-Group {
     }
 }
 
-# Function to handle group deletion
 function Delete-Group {
     $groupName = Read-Host "Enter the name of the group to delete"
 
@@ -277,7 +263,6 @@ function Delete-Group {
     }
 }
 
-# Function to handle group recovery
 function Recover-Group {
     $searchTerm = Read-Host "Enter the display name to search for deleted groups"
 
